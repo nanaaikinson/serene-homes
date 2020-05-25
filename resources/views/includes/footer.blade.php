@@ -2,7 +2,7 @@
   <div class="top py-5">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4 col-md-6">
           <div class="links">
             <ul class="list-inline">
               <li class="list-inline-item active font-weight-bold">
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-8 col-md-6">
           <div class="d-flex float-md-right subscription">
 
             <div class="input-icon pr-4">

@@ -13,5 +13,7 @@
 |
 */
 
-$router->get("/", "Pages\MainController@index");
-$router->get("/property", "Pages\MainController@property");
+$router->get("/", "MainController@index");
+$router->get("/property", "MainController@property");
+
+$router->get('{path:.*}', "MainController@admin");

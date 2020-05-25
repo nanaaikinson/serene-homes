@@ -13,6 +13,10 @@ let mix = require("laravel-mix");
 
 // mix.browserSync("lusaka.test");
 
+if (mix.inProduction()) {
+  mix.version();
+}
+
 mix.webpackConfig({
   resolve: {
     alias: {
