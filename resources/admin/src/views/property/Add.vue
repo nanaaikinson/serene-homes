@@ -573,7 +573,8 @@ export default {
           errorBag = data.message;
         }
 
-        formMsg.innerHTML = `<div class="alert alert-danger">${errorBag}</div>`;
+        // formMsg.innerHTML = `<div class="alert alert-danger">${errorBag}</div>`;
+        Swal.fire("Error", errorBag, "error");
       }
     },
 
