@@ -130,6 +130,10 @@
           <div class="card card-p-2">
             <h5>Property Video Presentation</h5>
             <hr class="mb-4">
+
+            <div>
+              <iframe width="100%" height="500" src="https://www.youtube.com/embed/F8xrBRn121Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,98 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --blue: #2684ff;
+  --indigo: #6e00ff;
+  --purple: #510fa8;
+  --pink: #f074ad;
+  --red: #ff5630;
+  --orange: #ffab00;
+  --yellow: #ffcc00;
+  --green: #36b37e;
+  --teal: #00b8d9;
+  --cyan: #4bd6e5;
+  --white: #fff;
+  --gray: #c0ccda;
+  --gray-dark: #3c4858;
+  --primary: #6e00ff;
+  --secondary: #eff2f7;
+  --success: #36b37e;
+  --info: #00b8d9;
+  --warning: #ffab00;
+  --danger: #ff5630;
+  --light: #eff2f7;
+  --dark: #273444;
+  --neutral: #fff;
+  --white: #fff;
+}
+
+body {
+  font-family: "Fira Sans", serif;
+}
+
+.auth-wrapper {
+  margin: 7.5% auto;
+  width: 420px;
+  position: relative;
+
+  p,
+  a {
+    font-weight: 300;
+  }
+}
+
+.box {
+  background: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 20px rgba(19, 20, 21, 0.1);
+  box-shadow: 0 4px 20px rgba(19, 20, 21, 0.1);
+  display: block;
+  margin-bottom: 24px;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.form-control {
+  outline: 0;
+  box-shadow: none;
+}
+
+.form-control,
+.btn {
+  &:focus,
+  &:active {
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+}
+
+.btn-dark {
+  background: #131415;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.app-header {
+  .navbar {
+    min-height: 70px;
+  }
+}
+
+.card {
+  margin-bottom: 1.5rem;
+  border-color: #edf2f9;
+  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
+}
+
+.property-photo-container {
+  .image {
+    height: 180px;
+
+    img {
+      width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+  }
+}

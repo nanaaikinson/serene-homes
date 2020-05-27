@@ -13,6 +13,21 @@
 |
 */
 
+/**** API ****/
+$router->group(["prefix" => "api"], function () use ($router) {
+  $router->group(["prefix" => "auth"], function () use ($router) {
+    $router->post("/login", "Api\AuthController@login");
+  });
+
+  $router->group(["middleware" => "auth"], function () use ($router) {
+    $router->group(["prefix" => "properties"], function () use ($router) {
+      $router->get("/", "Api\PropertyController@index");
+      $router->get("/property-types", "Api\PropertyController@propertyTypes");
+      $router->post("/", "Api\PropertyController@store");
+    });
+  });
+});
+
 $router->get("/", "MainController@index");
 $router->get("/property", "MainController@property");
 

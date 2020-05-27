@@ -1,0 +1,14 @@
+### Login
+POST http://localhost:8000/api/auth/login
+content-type: application/json
+
+{
+  "email": "nanaaikinson24@gmail.com",
+  "password": "12345678"
+}
+
+### Authebticated Routes
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5hbmFhaWtpbnNvbjI0QGdtYWlsLmNvbSIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwIiwiZXhwIjoxNTkwNTUxOTAzLCJpYXQiOjE1OTA1MjMxMDN9.h33AUwV1XuI5GDRbMCptcVOBPz2wOYbAAKWJ-4ELIo4
+
+GET http://localhost:8000/api/properties
+Authorization: Bearer {{token}}
