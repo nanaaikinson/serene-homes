@@ -23,12 +23,15 @@ $router->group(["prefix" => "api"], function () use ($router) {
     $router->group(["prefix" => "properties"], function () use ($router) {
       $router->get("/", "Api\PropertyController@index");
       $router->get("/property-types", "Api\PropertyController@propertyTypes");
+      $router->get("/{mask}", "Api\PropertyController@show");
       $router->post("/", "Api\PropertyController@store");
+      $router->post("/{mask}", "Api\PropertyController@update");
+      $router->delete("/{mask}", "Api\PropertyController@destroy");
     });
   });
 });
 
 $router->get("/", "MainController@index");
-$router->get("/property", "MainController@property");
+$router->get("/{property}", "PropertyController@show");
 
 $router->get('{path:.*}', "MainController@admin");

@@ -256,8 +256,8 @@ h6 {
 
 .property-meta-features .property-additional-features {
   padding-left: 12px !important;
-  -moz-column-count: 3;
-       column-count: 3;
+  -moz-column-count: 2;
+       column-count: 2;
 }
 
 .property-slider img {

@@ -30,6 +30,7 @@ class CreatePropertiesTable extends Migration
 			$table->boolean('private_compound')->default(0)->nullable();
 			$table->boolean('status')->default(1)->nullable();
 			$table->text('slug')->nullable();
+			$table->text('video_url')->nullable();
 			$table->text('meta_keywords')->nullable();
 			$table->text('meta_description')->nullable();
 			$table->unsignedBigInteger('mask')->unique()->nullable();

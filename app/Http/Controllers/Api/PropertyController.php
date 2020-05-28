@@ -38,6 +38,7 @@ class PropertyController extends Controller
 			$rules = [
 				"title" => "required",
 				"location" => "required",
+				"video_url" => "nullable|url",
 				"property_type" => "required|integer|not_in:0",
 				"contract_type" => "required",
 				"bedrooms" => "required|min:1",
@@ -60,6 +61,7 @@ class PropertyController extends Controller
 			$property = Property::create([
 				"title" => $request->title,
 				"property_type_id" => $request->property_type,
+				"video_url" => $request->video_url,
 				"description" => $request->overview,
 				"location" => $request->location,
 				"contract_type" => get_contract_type($request->contract_type),

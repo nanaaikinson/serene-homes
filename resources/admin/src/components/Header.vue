@@ -30,9 +30,7 @@
 </template>
 
 <script>
-import VueFeather from "vue-feather";
 export default {
-  name: "Header",
-  components: { feather: VueFeather }
+  name: "Header"
 };
 </script>

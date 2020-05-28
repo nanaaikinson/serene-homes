@@ -123,6 +123,20 @@
 
             <div class="col-md-6 col-lg-4 mb-3">
               <div class="form-group">
+                <label for="video_url">Video Url</label>
+                <input
+                  type="text"
+                  name="video_url"
+                  id="video_url"
+                  class="form-control"
+                  v-model.trim="form.video_url"
+                  placeholder="Eg: https://www.youtube.com/embed/F8xrBRn121Y"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="form-group">
                 <label for="garages">Garages</label>
                 <input
                   min="0"
@@ -479,6 +493,7 @@ export default {
         location: "",
         property_type: "",
         contract_type: "",
+        video_url: "",
         bedrooms: 0,
         bathrooms: 0,
         living_rooms: 0,
