@@ -34,7 +34,6 @@ class PropertyController extends Controller
 	public function store(Request $request)
 	{
 		try {
-
 			$rules = [
 				"title" => "required",
 				"location" => "required",
@@ -69,9 +68,9 @@ class PropertyController extends Controller
 				"bedroom" => $request->bedrooms,
 				"garage" => $request->garages,
 				"living_area" => $request->living_rooms,
-				"self_contained" => $request->self_contained ? 1 : 0,
-				"furnished" => $request->furnished ? 1 : 0,
-				"private_compound" => $request->private_compound ? 1 : 0,
+				"self_contained" => $request->self_contained == "true" ? 1 : 0,
+				"furnished" => $request->furnished == "true" ? 1 : 0,
+				"private_compound" => $request->private_compound == "true" ? 1 : 0,
 				"slug" => Str::slug($request->title, "-") . "-" . $mask,
 				"mask" => $mask,
 				// "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
@@ -83,21 +82,21 @@ class PropertyController extends Controller
 			// Save property features
 			PropertyFeature::create([
 				"property_id" => $property->id,
-				"air_conditioning" => $request->air_conditioning ? 1 : 0,
-				"cooker" => $request->cooker ? 1 : 0,
-				"washing_machine" => $request->washing_machine ? 1 : 0,
-				"fans" => $request->fans ? 1 : 0,
-				"refrigerator" => $request->refrigerator ? 1 : 0,
-				"microwave" => $request->microwave ? 1 : 0,
-				"internet_access" => $request->internet_access ? 1 : 0,
-				"satellite_tv" => $request->satellite_tv ? 1 : 0,
-				"garden" => $request->garden ? 1 : 0,
-				"annex" => $request->annex ? 1 : 0,
-				"roof_terrace" => $request->roof_terrace ? 1 : 0,
-				"swimming_pool" => $request->swimming_pool ? 1 : 0,
-				"security_service" => $request->security_service ? 1 : 0,
-				"generator" => $request->generator ? 1 : 0,
-				"water_reservoir" => $request->water_reservoir ? 1 : 0,
+				"air_conditioning" => $request->air_conditioning == "true" ? 1 : 0,
+				"cooker" => $request->cooker == "true" ? 1 : 0,
+				"washing_machine" => $request->washing_machine == "true" ? 1 : 0,
+				"fans" => $request->fans == "true" ? 1 : 0,
+				"refrigerator" => $request->refrigerator == "true" ? 1 : 0,
+				"microwave" => $request->microwave == "true" ? 1 : 0,
+				"internet_access" => $request->internet_access == "true" ? 1 : 0,
+				"satellite_tv" => $request->satellite_tv == "true" ? 1 : 0,
+				"garden" => $request->garden == "true" ? 1 : 0,
+				"annex" => $request->annex == "true" ? 1 : 0,
+				"roof_terrace" => $request->roof_terrace == "true" ? 1 : 0,
+				"swimming_pool" => $request->swimming_pool == "true" ? 1 : 0,
+				"security_service" => $request->security_service == "true" ? 1 : 0,
+				"generator" => $request->generator == "true" ? 1 : 0,
+				"water_reservoir" => $request->water_reservoir == "true" ? 1 : 0,
 				// "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
 				// "updated_at" => Carbon::now()->format("Y-m-d H:i:s"),
 			]);
@@ -138,6 +137,23 @@ class PropertyController extends Controller
 			return $this->errorResponse("An error occurred while creating this record");
 		} catch (Exception $e) {
 			DB::rollBack();
+			return $this->errorResponse($e->getMessage());
+		}
+	}
+
+	public function show($mask)
+	{
+		try {
+			$property = Property::where("mask", (int) $mask)->first();
+			if ($property) {
+				$photos = PropertyFile::where("property_id", $property->id)->get();
+				$features = PropertyFeature::where("property_id", $property->id)->first();
+				$property->contract_type = get_contract_type_name($property->contract_type);
+
+				return $this->successResponse("", compact("property", "photos", "features"));
+			}
+			return $this->notFoundResponse();
+		} catch (Exception $e) {
 			return $this->errorResponse($e->getMessage());
 		}
 	}
