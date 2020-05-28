@@ -28,10 +28,14 @@ $router->group(["prefix" => "api"], function () use ($router) {
       $router->post("/{mask}", "Api\PropertyController@update");
       $router->delete("/{mask}", "Api\PropertyController@destroy");
     });
+
+    $router->put("/photo/set-cover/{id}", "Api\FileController@setCover");
+    $router->delete("/photo/{id}", "Api\FileController@destroy");
   });
 });
 
 $router->get("/", "MainController@index");
+$router->get("/properties", "PropertyController@properties");
 $router->get("/{property}", "PropertyController@show");
 
 $router->get('{path:.*}', "MainController@admin");

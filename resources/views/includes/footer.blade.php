@@ -5,14 +5,14 @@
         <div class="col-sm-4 col-md-6">
           <div class="links">
             <ul class="list-inline">
-              <li class="list-inline-item active font-weight-bold">
-                <a href="javascript:;">Home</a>
+              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == '' ? 'active' : '' }}">
+                <a href="{{ url('/') }}">Home</a>
               </li>
-              <li class="list-inline-item font-weight-bold">
-                <a href="javascript:;">Properties</a>
+              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'properties' ? 'active' : '' }}">
+                <a href="{{ url('properties') }}">Properties</a>
               </li>
-              <li class="list-inline-item font-weight-bold">
-                <a href="javascript:;">About</a>
+              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'about' ? 'active' : '' }}">
+                <a href="{{ url('about') }}">About</a>
               </li>
               <li class="list-inline-item font-weight-bold">
                 <a href="javascript:;">Contact</a>

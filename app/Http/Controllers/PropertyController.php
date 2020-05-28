@@ -23,4 +23,19 @@ class PropertyController extends Controller
 			abort(404);
 		}
 	}
+
+	public function properties()
+	{
+		try {
+			$properties = Property::all();
+			foreach ($properties as $k => $property) {
+				$coverPhoto = PropertyFile::where("property_id", (int) $property->id)->where("is_cover", 1)->first();
+				$properties[$k]->photo = $coverPhoto->file_url;
+			}
+
+			return view("pages.properties", compact("properties"));
+		} catch (Exception $e) {
+			abort(404);
+		}
+	}
 }

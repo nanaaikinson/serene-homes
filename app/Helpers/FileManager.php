@@ -39,5 +39,26 @@ class FileManager
 
   public static function deleteFile($filename, $folder = null)
   {
+    if (inProduction()) {
+      if ($folder) {
+        $path = public_path() . "/uploads/{$folder}/{$filename}";
+        @chmod($path, 0755);
+        @unlink($path);
+      } else {
+        $path = public_path() . "/uploads/{$filename}";
+        @chmod($path, 0755);
+        @unlink($path);
+      }
+    } else {
+      if ($folder) {
+        $path = public_path() . "/uploads/{$folder}/{$filename}";
+        @chmod($path, 0755);
+        @unlink($path);
+      } else {
+        $path = public_path() . "/uploads/{$filename}";
+        @chmod($path, 0755);
+        @unlink($path);
+      }
+    }
   }
 }

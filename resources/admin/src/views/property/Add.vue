@@ -564,6 +564,8 @@ export default {
       formData.append("cover_index", coverIndex ? coverIndex : 0);
 
       try {
+        Helpers.AddLoading(btn);
+
         const response = await Axios.post("/api/properties", formData);
         const res = await response.data;
         Swal.fire({
@@ -577,6 +579,8 @@ export default {
           }
         });
       } catch (err) {
+        Helpers.RemoveLoading(btn);
+
         const { status, data } = err.response;
         let errorBag = "";
 

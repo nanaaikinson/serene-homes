@@ -434,6 +434,37 @@
               <VueEditor v-model.trim="form.overview" :editor-toolbar="toolbar" />
             </div>
 
+            <div class="col-12 mb-4 pb-3 border-bottom">
+              <LoadingComponent :active.sync="loading.isLoading" :is-full-page="loading.fullPage"></LoadingComponent>
+
+              <h6 class="mb-2" v-if="serverPhotos.length">Saved Photos</h6>
+
+              <div class="row">
+                <div class="col-md-4 col-lg-3 mb-3" v-for="(photo, i) in serverPhotos" :key="i">
+                  <div class="property-photo-container">
+                    <div class="image mb-2">
+                      <img :src="photo.file_url" />
+                    </div>
+
+                    <div class="d-flex">
+                      <button
+                        class="btn btn-warning btn-sm w-50 mr-2"
+                        type="button"
+                        :disabled="photo.is_cover === 1"
+                        @click="setServerCover(photo.id)"
+                      >Cover photo</button>
+
+                      <button
+                        class="btn btn-danger btn-sm w-50"
+                        type="button"
+                        @click="deletePhoto(photo.id)"
+                      >Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="col-12 mb-3">
               <button
                 @click="triggerUpload"
@@ -482,12 +513,15 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import LoadingComponent from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   name: "PropertyEdit",
-  components: { VueEditor },
+  components: { VueEditor, LoadingComponent },
   data() {
     return {
+      mask: "",
       form: {
         title: "",
         location: "",
@@ -520,11 +554,16 @@ export default {
       },
       propertyTypes: [],
       photos: [],
+      serverPhotos: [],
       toolbar: [
         ["bold", "italic", "underline", "strike"],
         ["color", "background"],
         [{ list: "ordered" }, { list: "bullet" }]
-      ]
+      ],
+      loading: {
+        isLoading: false,
+        fullPage: false
+      }
     };
   },
   methods: {
@@ -535,7 +574,7 @@ export default {
       let errors = "";
       let coverIndex = null;
 
-      if (this.photos.length < 1) {
+      if (!this.photos.length && !this.serverPhotos.length) {
         errors += "<span class='d-block'>Please add at least 1 photo</span>";
       }
 
@@ -553,19 +592,35 @@ export default {
         formData.append(key, value);
       }
 
-      for (let i = 0; i < this.photos.length; i++) {
-        const photo = this.photos[i];
-        const hasCover = photo.cover;
-        if (hasCover) coverIndex = i;
+      if (this.photos.length) {
+        for (let i = 0; i < this.photos.length; i++) {
+          const photo = this.photos[i];
+          const hasCover = photo.cover;
+          if (hasCover) coverIndex = i;
 
-        formData.append("photos[]", photo.file);
+          formData.append("photos[]", photo.file);
+        }
       }
 
-      formData.append("cover_index", coverIndex ? coverIndex : 0);
+      if (!this.serverPhotos.length) {
+        formData.append("cover_index", coverIndex ? coverIndex : 0);
+      }
+
+      if (this.serverPhotos.length) {
+        const index = this.serverPhotos.findIndex(el => el.is_cover === 1);
+        if (index === -1)
+          formData.append("cover_index", coverIndex ? coverIndex : 0);
+      }
 
       try {
-        const response = await Axios.post("/api/properties", formData);
+        Helpers.AddLoading(btn);
+        const response = await Axios.post(
+          "/api/properties/" + this.mask,
+          formData
+        );
         const res = await response.data;
+        Helpers.RemoveLoading(btn);
+
         Swal.fire({
           title: "Success",
           text: res.message,
@@ -577,6 +632,7 @@ export default {
           }
         });
       } catch (err) {
+        Helpers.RemoveLoading(btn);
         const { status, data } = err.response;
         let errorBag = "";
 
@@ -641,6 +697,49 @@ export default {
       this.photos = this.photos.filter((el, i) => i !== index);
     },
 
+    deletePhoto(id) {
+      Swal.fire({
+        title: "Are you sure to delete?",
+        text: "This permanently!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.loading.isLoading = true;
+
+          Axios.delete("/api/photo/" + id)
+            .then(response => {
+              this.loading.isLoading = false;
+              const res = response.data;
+
+              this.serverPhotos = this.serverPhotos.filter(el => el.id !== id);
+            })
+            .catch(err => console.log(err));
+        }
+      });
+    },
+
+    setServerCover(id) {
+      this.loading.isLoading = true;
+
+      Axios.put("/api/photo/set-cover/" + id)
+        .then(response => {
+          this.loading.isLoading = false;
+          const res = response.data;
+          const index = this.serverPhotos.findIndex(el => el.id === id);
+          const coverIndex = this.serverPhotos.findIndex(
+            el => el.is_cover === 1
+          );
+
+          if (coverIndex !== -1) this.serverPhotos[coverIndex].is_cover = 0;
+          if (index !== -1) this.serverPhotos[index].is_cover = 1;
+        })
+        .catch(err => console.log(err));
+    },
+
     async fetchData() {
       const response = await Axios.get("/api/properties/property-types");
       const res = await response.data;
@@ -651,7 +750,7 @@ export default {
       this.form.title = property.title;
       this.form.location = property.location;
       this.form.property_type = property.property_type_id;
-      this.form.contract_type = property.contract_type;
+      this.form.contract_type = property.contract_type.toLowerCase();
       this.form.video_url = property.video_url;
       this.form.bedrooms = property.bedroom;
       this.form.bathrooms = property.bathroom;
@@ -679,6 +778,9 @@ export default {
       this.form.security_service =
         features.security_service === 1 ? true : false;
       this.form.overview = property.description;
+      this.mask = property.mask;
+
+      this.serverPhotos = photos;
     }
   },
 

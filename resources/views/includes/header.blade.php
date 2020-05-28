@@ -8,13 +8,13 @@
 
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item {{ request()->segment(1) == '' ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Properties</a>
+          <li class="nav-item {{ request()->segment(1) == 'properties' ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/properties') }}">Properties</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ request()->segment(1) == 'about' ? 'active' : '' }}">
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">

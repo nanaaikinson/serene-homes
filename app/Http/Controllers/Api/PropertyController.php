@@ -97,8 +97,6 @@ class PropertyController extends Controller
 				"security_service" => $request->security_service == "true" ? 1 : 0,
 				"generator" => $request->generator == "true" ? 1 : 0,
 				"water_reservoir" => $request->water_reservoir == "true" ? 1 : 0,
-				// "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
-				// "updated_at" => Carbon::now()->format("Y-m-d H:i:s"),
 			]);
 
 			// Upload images
@@ -116,8 +114,6 @@ class PropertyController extends Controller
 						"filename" => $uploaded->filename,
 						"is_cover" => $i == $request->cover_index ? 1 : 0,
 						"mask" => generate_mask(),
-						// "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
-						// "updated_at" => Carbon::now()->format("Y-m-d H:i:s"),
 					]);
 
 					$uploadedArr[] = [
@@ -154,6 +150,112 @@ class PropertyController extends Controller
 			}
 			return $this->notFoundResponse();
 		} catch (Exception $e) {
+			return $this->errorResponse($e->getMessage());
+		}
+	}
+
+	public function update(Request $request, $mask)
+	{
+		try {
+			$property = Property::where("mask", (int) $mask)->first();
+			if ($property) {
+				$rules = [
+					"title" => "required",
+					"location" => "required",
+					"video_url" => "nullable|url",
+					"property_type" => "required|integer|not_in:0",
+					"contract_type" => "required",
+					"bedrooms" => "required|min:1",
+					"bathrooms" => "required|min:1",
+					"overview" => "required",
+					"photos.*" => "nullable|mimes:jpg,jpeg,png|max:2048"
+				];
+				$validator = Validator::make($request->all(), $rules);
+				if ($validator->fails()) {
+					$errors = $validator->errors()->all();
+					return $this->validationResponse($errors);
+				}
+
+				// Process Data
+				DB::beginTransaction();
+
+				// Save property
+				$property->update([
+					"title" => $request->title,
+					"property_type_id" => $request->property_type,
+					"video_url" => $request->video_url,
+					"description" => $request->overview,
+					"location" => $request->location,
+					"contract_type" => get_contract_type($request->contract_type),
+					"bathroom" => $request->bathrooms,
+					"bedroom" => $request->bedrooms,
+					"garage" => $request->garages,
+					"living_area" => $request->living_rooms,
+					"self_contained" => $request->self_contained == "true" ? 1 : 0,
+					"furnished" => $request->furnished == "true" ? 1 : 0,
+					"private_compound" => $request->private_compound == "true" ? 1 : 0,
+					"slug" => Str::slug($request->title, "-") . "-" . $mask,
+				]);
+
+				$property = (object) $property;
+
+				// Save property features
+				PropertyFeature::where("property_id", $property->id)->update([
+					"property_id" => $property->id,
+					"air_conditioning" => $request->air_conditioning == "true" ? 1 : 0,
+					"cooker" => $request->cooker == "true" ? 1 : 0,
+					"washing_machine" => $request->washing_machine == "true" ? 1 : 0,
+					"fans" => $request->fans == "true" ? 1 : 0,
+					"refrigerator" => $request->refrigerator == "true" ? 1 : 0,
+					"microwave" => $request->microwave == "true" ? 1 : 0,
+					"internet_access" => $request->internet_access == "true" ? 1 : 0,
+					"satellite_tv" => $request->satellite_tv == "true" ? 1 : 0,
+					"garden" => $request->garden == "true" ? 1 : 0,
+					"annex" => $request->annex == "true" ? 1 : 0,
+					"roof_terrace" => $request->roof_terrace == "true" ? 1 : 0,
+					"swimming_pool" => $request->swimming_pool == "true" ? 1 : 0,
+					"security_service" => $request->security_service == "true" ? 1 : 0,
+					"generator" => $request->generator == "true" ? 1 : 0,
+					"water_reservoir" => $request->water_reservoir == "true" ? 1 : 0,
+				]);
+
+				if ($request->hasFile("photos")) {
+					// Upload images
+					$photosCount = count($request->file("photos"));
+					$photosArr = ($request->file("photos"));
+					$uploadedArr = [];
+
+					for ($i = 0; $i < $photosCount; $i++) {
+						$uploaded = FileManager::uploadFile($photosArr[$i], generate_mask(), ST_PROPERTY_FOLDER);
+
+						if ($uploaded) {
+							$file = new PropertyFile();
+							$file->property_id = $property->id;
+							$file->file_url = $uploaded->path;
+							$file->filename = $uploaded->filename;
+							$file->mask = generate_mask();
+							if ($request->cover_index) {
+								$file->is_cover = $i == $request->cover_index ? 1 : 0;
+							} else {
+								$file->is_cover = 0;
+							}
+							$file->save();
+
+							$uploadedArr[] = [
+								"file_id" => $file->id,
+								"file_url" => $file->file_url
+							];
+						}
+					}
+				}
+
+				DB::commit();
+
+				return $this->successResponse("Property created successfully");
+			}
+			return $this->notFoundResponse();
+		} catch (Exception $e) {
+			DB::rollBack();
 			return $this->errorResponse($e->getMessage());
 		}
 	}
