@@ -8,7 +8,8 @@
               <li class="list-inline-item font-weight-bold {{ request()->segment(1) == '' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">Home</a>
               </li>
-              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'properties' ? 'active' : '' }}">
+              <li class="list-inline-item font-weight-bold 
+              {{ request()->segment(1) == 'properties' || request()->segment(1) == 'property' ? 'active' : '' }}">
                 <a href="{{ url('properties') }}">Properties</a>
               </li>
               <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'about' ? 'active' : '' }}">

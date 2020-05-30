@@ -229,6 +229,52 @@ h6 {
   }
 }
 
+.site-home-page {
+  margin-top: -7px;
+
+  .slider-section {
+    position: relative;
+
+    .slider-content {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+
+      p {
+        color: #fff;
+        font-size: 28px;
+      }
+
+      .contact-btn {
+        border-radius: 30px;
+        background: $yellow;
+        border: 1px solid $yellow;
+        transition: ease 0.35s;
+
+        &:hover {
+          background: $yellow-dark;
+          border: 1px solid $yellow-dark;
+        }
+      }
+    }
+
+    .slider-controls-container {
+      position: relative;
+      z-index: 1;
+      margin-top: -50px;
+    }
+  }
+
+  .slider-item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 500px;
+    cursor: pointer;
+  }
+}
+
 .property-metas {
   img {
     width: 70%;
@@ -365,4 +411,60 @@ h6 {
 
 .card-p-2 {
   padding: 1rem;
+}
+
+.property-box {
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+
+  background: #fff;
+  -webkit-box-shadow: 0 4px 20px rgba(19, 20, 21, 0.1);
+  box-shadow: 0 4px 20px rgba(19, 20, 21, 0.1);
+  display: block;
+  position: relative;
+  width: 100%;
+
+  .property-image {
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .property-content {
+    .title {
+      h5 {
+        transition: ease 0.35s all;
+      }
+
+      &:hover {
+        text-decoration: none;
+        h5 {
+          color: $yellow-dark;
+        }
+      }
+    }
+
+    .meta {
+      ul.list-inline {
+        width: 100%;
+
+        // li.list-inline-item {
+        //   width: 25%;
+        // }
+      }
+
+      .icon {
+        img {
+          height: 20px;
+        }
+      }
+      .number {
+        font-size: 20px;
+        padding-left: 8px;
+        margin-top: 4px;
+      }
+    }
+  }
 }

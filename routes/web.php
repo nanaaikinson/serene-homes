@@ -36,6 +36,6 @@ $router->group(["prefix" => "api"], function () use ($router) {
 
 $router->get("/", "MainController@index");
 $router->get("/properties", "PropertyController@properties");
-$router->get("/{property}", "PropertyController@show");
+$router->get("/property/{property}", "PropertyController@show");
 
 $router->get('{path:.*}', "MainController@admin");

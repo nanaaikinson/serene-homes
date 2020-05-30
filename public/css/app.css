@@ -199,6 +199,52 @@ h6 {
   line-height: 1.6;
 }
 
+.site-home-page {
+  margin-top: -7px;
+}
+
+.site-home-page .slider-section {
+  position: relative;
+}
+
+.site-home-page .slider-section .slider-content {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.site-home-page .slider-section .slider-content p {
+  color: #fff;
+  font-size: 28px;
+}
+
+.site-home-page .slider-section .slider-content .contact-btn {
+  border-radius: 30px;
+  background: #ffff00;
+  border: 1px solid #ffff00;
+  transition: ease 0.35s;
+}
+
+.site-home-page .slider-section .slider-content .contact-btn:hover {
+  background: #ffd000;
+  border: 1px solid #ffd000;
+}
+
+.site-home-page .slider-section .slider-controls-container {
+  position: relative;
+  z-index: 1;
+  margin-top: -50px;
+}
+
+.site-home-page .slider-item {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  cursor: pointer;
+}
+
 .property-metas img {
   width: 70%;
   height: auto;
@@ -333,5 +379,49 @@ h6 {
 
 .card-p-2 {
   padding: 1rem;
+}
+
+.property-box {
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(19, 20, 21, 0.1);
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.property-box .property-image {
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.property-box .property-content .title h5 {
+  transition: ease 0.35s all;
+}
+
+.property-box .property-content .title:hover {
+  text-decoration: none;
+}
+
+.property-box .property-content .title:hover h5 {
+  color: #ffd000;
+}
+
+.property-box .property-content .meta ul.list-inline {
+  width: 100%;
+}
+
+.property-box .property-content .meta .icon img {
+  height: 20px;
+}
+
+.property-box .property-content .meta .number {
+  font-size: 20px;
+  padding-left: 8px;
+  margin-top: 4px;
 }
 

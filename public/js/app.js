@@ -2517,8 +2517,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var feather_icons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(feather_icons__WEBPACK_IMPORTED_MODULE_0__);
 
 var contactForm = document.querySelector("#contactForm");
+var contactHeader = document.querySelector("#contactHeader");
+var sliderContactBtn = document.querySelector("#sliderContactBtn");
+var contactSection = document.querySelector(".site-contact");
 document.addEventListener("DOMContentLoaded", function (e) {
   feather_icons__WEBPACK_IMPORTED_MODULE_0___default.a.replace();
+
+  contactHeader.onclick = function (e) {
+    contactSection.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
+
+  sliderContactBtn.onclick = function (e) {
+    contactSection.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
+
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
   });

@@ -11,14 +11,15 @@
           <li class="nav-item {{ request()->segment(1) == '' ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item {{ request()->segment(1) == 'properties' ? 'active' : '' }}">
+          <li class="nav-item 
+          {{ request()->segment(1) == 'properties' || request()->segment(1) == 'property' ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/properties') }}">Properties</a>
           </li>
           <li class="nav-item {{ request()->segment(1) == 'about' ? 'active' : '' }}">
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#contact" id="contactHeader">Contact</a>
           </li>
         </ul>
       </div>
