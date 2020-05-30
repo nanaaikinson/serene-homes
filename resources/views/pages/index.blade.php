@@ -37,14 +37,14 @@
 
   <div class="home-properties my-5">
     <div class="container">
-      <h5 class="text-uppercase font-weight-bolder mb-5 text-dark">Our Apartments</h5>
+      <h5 class="text-uppercase font-weight-bolder mb-3 text-dark">Our Properties</h5>
 
       <div class="row">
         @if ($properties)
         @foreach ($properties as $property)
 
         <div class="col-md-6 col-lg-4 mb-3">
-          <div class="property-box border-radius-rounded">
+          <div class="property-box border-radius-rounded" data-href="{{ url('property/'. $property->slug) }}">
             <div class="property-image" style="background-image: url({{ url($property->photo) }});"></div>
 
             <div class="property-content px-3 py-3">
@@ -93,7 +93,7 @@
     </div>
   </div>
 
-  <div class="home-video" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.45)), url({{ url('/img/slider-1.JPG') }});">
+  <div class="home-video" id="about" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.45)), url({{ url('/img/slider-1.JPG') }});">
     <div class="home-about d-none d-lg-block w-50">
       <div class="d-flex py-5 px-5 align-items-center justify-content-center">
         <div class="content">

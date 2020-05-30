@@ -69,5 +69,7 @@
   </div>
 </footer>
 
+<div class="sidenav-overlay"></div>
+
 <script src="{{ url('/js/app.js') }}"></script>
 @stack('scripts')

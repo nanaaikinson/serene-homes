@@ -37,7 +37,7 @@ class CreatePropertiesTable extends Migration
 			$table->timestamps();
 			$table->softDeletes();
 
-			$table->foreign('property_type_id')->references('id')->on('property_types')->onDelete('set null');
+			//$table->foreign('property_type_id')->references('id')->on('property_types')->onDelete('set null');
 		});
 	}
 

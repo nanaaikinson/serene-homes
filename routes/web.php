@@ -15,6 +15,9 @@
 
 /**** API ****/
 $router->group(["prefix" => "api"], function () use ($router) {
+
+  $router->post("/contact", "Api\ContactController@contactUs");
+
   $router->group(["prefix" => "auth"], function () use ($router) {
     $router->post("/login", "Api\AuthController@login");
   });

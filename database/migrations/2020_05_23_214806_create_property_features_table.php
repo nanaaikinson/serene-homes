@@ -35,7 +35,7 @@ class CreatePropertyFeaturesTable extends Migration
 			$table->timestamps();
 			$table->softDeletes();
 
-			$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+			//$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
 		});
 	}
 

@@ -9,7 +9,7 @@
       @foreach ($properties as $property)
 
       <div class="col-md-6 col-lg-4 mb-3">
-        <div class="property-box border-radius-rounded">
+        <div class="property-box border-radius-rounded" data-href="{{ url('property/'. $property->slug) }}">
           <div class="property-image" style="background-image: url({{ url($property->photo) }});"></div>
 
           <div class="property-content px-3 py-3">

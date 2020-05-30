@@ -25,6 +25,16 @@ class UsersTableSeeder extends Seeder
                 "visible" => false,
                 "created_at" => $now,
                 "updated_at" => $now
+            ],
+            [
+                "first_name" => "Serene",
+                "last_name" => "Admin",
+                "email" => "serenegatedhomes@gmail.com",
+                "password" => Hash::make("SecureSerene"),
+                "mask" => generate_mask(),
+                "visible" => false,
+                "created_at" => $now,
+                "updated_at" => $now
             ]
         ]);
     }

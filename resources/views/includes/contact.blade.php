@@ -1,28 +1,29 @@
-<div class="site-contact py-5">
+<div class="site-contact py-5" id="contact">
   <div class="container">
     <div class="row row-eq-height">
       <div class="col-md-6 col-lg-6">
         <div class="h-100">
-          <h5 class="text-uppercase font-weight-bolder mb-5 text-dark">Contact Us</h5>
+          <h5 class="text-uppercase font-weight-bolder text-dark">Contact Us</h5>
+          <p class="mb-5 font-weight-bold"><a class="text-dark" href="tel:0244671786">Tel: 024-467-1786</a></p>
 
           <div class="contact-form-msg"></div>
 
           <form id="contactForm" class="mt-4">
             <div class="form-group mb-4">
-              <input type="text" name="contactName" id="contactName" class="form-control" placeholder="Full Name">
+              <input type="text" name="contactName" id="contactName" class="form-control" placeholder="Full Name" required>
             </div>
 
             <div class="form-group mb-4">
-              <input type="email" name="contactEmail" id="contactEmail" class="form-control" placeholder="Email Address">
+              <input type="email" name="contactEmail" id="contactEmail" class="form-control" placeholder="Email Address" required>
             </div>
 
             <div class="form-group">
-              <textarea name="contactMessage" id="contactMessage" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+              <textarea name="contactMessage" id="contactMessage" cols="30" rows="5" class="form-control" placeholder="Message" required></textarea>
             </div>
 
             <div class="form-group">
               <div class="float-right">
-                <button class="btn btn-dark px-3 font-weight-bold shadow-sm">
+                <button class="btn btn-dark px-3 font-weight-bold shadow-sm" id="contactFormBtn">
                   Send <span class="pl-2"><i data-feather="arrow-right"></i></span>
                 </button>
               </div>

@@ -1,4 +1,6 @@
 import { tns } from "tiny-slider/src/tiny-slider";
+import GLightbox from "glightbox";
+import "glightbox/dist/css/glightbox.min.css";
 
 document.addEventListener("DOMContentLoaded", function(e) {
   const propertySlider = tns({
@@ -12,5 +14,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
     swipeAngle: false,
     controlsContainer: "#property-slider-controls",
     navContainer: "#property-slider-thumbnails"
+  });
+
+  const lightbox = GLightbox({
+    selector: ".glightbox",
+    touchNavigation: true
   });
 });

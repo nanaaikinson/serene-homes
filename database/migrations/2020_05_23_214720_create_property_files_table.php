@@ -26,7 +26,7 @@ class CreatePropertyFilesTable extends Migration
 			$table->tinyInteger('category')->default(1)->nullable();
 			$table->timestamps();
 
-			$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+			//$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
 		});
 	}
 

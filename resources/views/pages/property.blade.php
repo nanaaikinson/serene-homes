@@ -13,11 +13,15 @@
       <div class="col-lg-9 col-xl-7 mb-4">
         <div class="property-slider">
           <div id="property-slider" class="mb-4">
-            <div><img class="border-radius-rounded" src="{{ url($coverPhoto->file_url) }}" alt=""></div>
+            <div>
+              <img class="border-radius-rounded glightbox" src="{{ url($coverPhoto->file_url) }}" alt="">
+            </div>
 
             @if(isset($otherPhotos))
             @foreach($otherPhotos as $photo)
-            <div><img class="border-radius-rounded" src="{{ url($photo->file_url) }}" alt=""></div>
+            <div>
+              <img class="border-radius-rounded glightbox" src="{{ url($photo->file_url) }}" alt="">
+            </div>
             @endforeach
             @endif
 
@@ -107,7 +111,7 @@
         </div>
 
         <div class="description">
-          <div class="card card-p-2">
+          <div class="card card-p-2 mb-3">
             <h5>Additional Features</h5>
             <hr class="mb-4">
 
@@ -185,7 +189,7 @@
       <div class="col-12">
         <div class="video-presentaion">
           <div class="card card-p-2">
-            <h5>Property Video Presentation</h5>
+            <h5>Video Presentation</h5>
             <hr class="mb-4">
 
             @if ($property->video_url)
