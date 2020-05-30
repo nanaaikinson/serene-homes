@@ -38,4 +38,4 @@ $router->get("/", "MainController@index");
 $router->get("/properties", "PropertyController@properties");
 $router->get("/property/{property}", "PropertyController@show");
 
-$router->get('{path:.*}', "MainController@admin");
+$router->get('/admin{path:.*}', "MainController@admin");

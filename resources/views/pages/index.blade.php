@@ -19,10 +19,10 @@
 
     <div class="container">
       <div class="slider-content">
-        <h4 class="text-uppercase text-white display-4 font-weight-bold">Serene Gated <span class="text-yellow font-weight-lighter">Homes</span></h4>
+        <h4 class="text-uppercase text-white display-4 font-weight-bolder">Serene Gated <span class="text-yellow font-weight-lighter">Homes</span></h4>
         <p>
-          We have amazing luxury apartments for short stay and rent.<br>
-          Our apartments are located in one of the best residential areas in <br>
+          We have amazing luxury apartments for short stay and rent. <br class="d-none d-sm-block">
+          Our apartments are located in one of the best residential areas in <br class="d-none d-sm-block">
           East Legon
         </p>
 
@@ -89,6 +89,17 @@
 
         @endforeach
         @endif
+      </div>
+    </div>
+  </div>
+
+  <div class="home-video" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.45)), url({{ url('/img/slider-1.JPG') }});">
+    <div class="home-about d-none d-lg-block w-50">
+      <div class="d-flex py-5 px-5 align-items-center justify-content-center">
+        <div class="content">
+          <h5 class="text-uppercase font-weight-bolder mb-3 text-dark">About Us</h5>
+          <p>Serene Gated Homes had very luxurious fully furnished homes and apartments for rent and short stay, our homes are located in very Serene environments in East Legon, with lots of amenities such as, 24hours protection, standby power plants spacious bedrooms, huge family lounges and a lot more.</p>
+        </div>
       </div>
     </div>
   </div>

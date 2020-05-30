@@ -1,30 +1,27 @@
 <footer class="site-footer">
   <div class="top py-5">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-4 col-md-6">
-          <div class="links">
-            <ul class="list-inline">
-              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == '' ? 'active' : '' }}">
-                <a href="{{ url('/') }}">Home</a>
-              </li>
-              <li class="list-inline-item font-weight-bold 
+      <div class="d-flex flex-column flex-md-row justify-content-md-between">
+        <div class="links">
+          <ul class="list-inline">
+            <li class="list-inline-item font-weight-bold {{ request()->segment(1) == '' ? 'active' : '' }}">
+              <a href="{{ url('/') }}">Home</a>
+            </li>
+            <li class="list-inline-item font-weight-bold 
               {{ request()->segment(1) == 'properties' || request()->segment(1) == 'property' ? 'active' : '' }}">
-                <a href="{{ url('properties') }}">Properties</a>
-              </li>
-              <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'about' ? 'active' : '' }}">
-                <a href="{{ url('about') }}">About</a>
-              </li>
-              <li class="list-inline-item font-weight-bold">
-                <a href="javascript:;">Contact</a>
-              </li>
-            </ul>
-          </div>
+              <a href="{{ url('properties') }}">Properties</a>
+            </li>
+            <li class="list-inline-item font-weight-bold {{ request()->segment(1) == 'about' ? 'active' : '' }}">
+              <a href="{{ url('about') }}">About</a>
+            </li>
+            <li class="list-inline-item font-weight-bold">
+              <a href="javascript:;">Contact</a>
+            </li>
+          </ul>
         </div>
 
-        <div class="col-sm-8 col-md-6">
-          <div class="d-flex float-md-right subscription">
-
+        <div class="subscription">
+          <div class="d-flex">
             <div class="input-icon pr-4">
               <input type="text" name="subscribe-input" id="subscribe-input" class="form-control" placeholder="Email Address">
               <button>

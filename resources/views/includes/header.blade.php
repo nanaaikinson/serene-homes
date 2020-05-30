@@ -1,7 +1,7 @@
 <div class="site-navigation">
   <nav class="navbar navbar-expand-md navbar-light nav-lg fixed-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand text-uppercase font-weight-bold" href="{{ url('/') }}">Serene gated <span class="text-yellow font-weight-light">homes</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <i data-feather="menu"></i>
       </button>
