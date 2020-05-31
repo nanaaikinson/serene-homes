@@ -79,6 +79,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
         return;
       }
       if (href.includes("#contact")) {
+        contactSection.scrollIntoView({
+          behavior: "smooth"
+        });
         return;
       }
       window.location.href = href;

@@ -87,7 +87,7 @@
 
             <div class="col-4 col-md-3">
               <div class="property-metas mb-3 h-100">
-                <span class="name font-weight-bold">Garages</span>
+                <span class="name font-weight-bold">Packing Space</span>
 
                 <div>
                   <img src="{{ url('/img/car-parking.svg') }}" alt="garage">
