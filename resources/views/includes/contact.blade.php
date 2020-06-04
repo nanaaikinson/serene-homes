@@ -4,7 +4,9 @@
       <div class="col-md-6 col-lg-6">
         <div class="h-100">
           <h5 class="text-uppercase font-weight-bolder text-dark">Contact Us</h5>
-          <p class="mb-5 font-weight-bold"><a class="text-dark" href="tel:0244671786">Tel: 024-467-1786</a></p>
+          <p class="font-weight-bold"><a class="text-dark" href="tel:00233244671786">Tel: +233244671786</a></p>
+          <p class="font-weight-bold"><a class="text-dark" href="tel:00447556426274">Tel: +447556426274</a></p>
+          <p class="mb-5 font-weight-bold"><a class="text-dark" href="tel:14433203930">Tel: +14433203930</a></p>
 
           <div class="contact-form-msg"></div>
 
